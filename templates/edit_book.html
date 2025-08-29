@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edit Book - Library</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">📚 Library Management</div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('books') }}">All Books</a></li>
+        <li><a href="{{ url_for('search') }}">Search</a></li>
+        <li><a class="active" href="#">Edit Book</a></li>
+        <li><a href="{{ url_for('library_card') }}">Library Card</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% with msgs = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in msgs %}
+    <div class="flash {{ cat }}">{{ msg }}</div>
+  {% endfor %}
+{% endwith %}
+
+<div class="container">
+  <h2>Edit Book</h2>
+
+  <form method="POST">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" value="{{ book.title }}" required>
+      </div>
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input id="author" name="author" type="text" value="{{ book.author }}" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="isbn">ISBN</label>
+        <input id="isbn" name="isbn" type="text" value="{{ book.isbn }}">
+      </div>
+      <div class="form-group">
+        <label for="published_year">Published Year</label>
+        <input id="published_year" name="published_year" type="number" min="1000" max="2025" value="{{ book.published_year }}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="genre">Genre</label>
+        <input id="genre" name="genre" type="text" value="{{ book.genre }}">
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          <option value="Available"   {% if book.status == 'Available' %}selected{% endif %}>Available</option>
+          <option value="Checked Out" {% if book.status == 'Checked Out' %}selected{% endif %}>Checked Out</option>
+          <option value="Reserved"    {% if book.status == 'Reserved' %}selected{% endif %}>Reserved</option>
+          <option value="Lost"        {% if book.status == 'Lost' %}selected{% endif %}>Lost</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Update Book</button>
+      <a class="btn btn-tertiary" href="{{ url_for('books') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<footer>© 2025 Library Management System</footer>
+</body>
+</html>

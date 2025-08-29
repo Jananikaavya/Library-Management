@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Books - Library</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">📚 Library Management</div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a class="active" href="{{ url_for('books') }}">All Books</a></li>
+        <li><a href="{{ url_for('search') }}">Search</a></li>
+        {% if session.get('user_id') %}
+          <li><a href="{{ url_for('add_book') }}">Add Book</a></li>
+          <li><a href="{{ url_for('library_card') }}">Library Card</a></li>
+          <li><a href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% with msgs = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in msgs %}
+    <div class="flash {{ cat }}">{{ msg }}</div>
+  {% endfor %}
+{% endwith %}
+
+<div class="container">
+  <h2>All Books</h2>
+
+  {% if books and books|length > 0 %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Title</th><th>Author</th><th>ISBN</th>
+          <th>Year</th><th>Genre</th><th>Status</th>
+          {% if session.get('user_id') %}<th>Actions</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in books %}
+        <tr>
+          <td>{{ b.id }}</td>
+          <td>{{ b.title }}</td>
+          <td>{{ b.author }}</td>
+          <td>{{ b.isbn }}</td>
+          <td>{{ b.published_year }}</td>
+          <td>{{ b.genre }}</td>
+          <td>
+            <span class="status-badge {% if b.status == 'Available' %}status-available{% else %}status-unavailable{% endif %}">
+              {{ b.status }}
+            </span>
+          </td>
+          {% if session.get('user_id') %}
+          <td>
+            <a class="btn btn-primary" href="{{ url_for('edit_book', book_id=b.id) }}">Edit</a>
+            <a class="btn btn-tertiary" onclick="return confirm('Delete this book?')" href="{{ url_for('delete_book', book_id=b.id) }}">Delete</a>
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p>No books found. {% if session.get('user_id') %}<a href="{{ url_for('add_book') }}">Add a book</a>.{% endif %}</p>
+  {% endif %}
+</div>
+
+<footer>© 2025 Library Management System</footer>
+</body>
+</html>

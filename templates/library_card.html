@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Library Card</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">📚 Library Management</div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('books') }}">All Books</a></li>
+        <li><a href="{{ url_for('search') }}">Search</a></li>
+        <li><a class="active" href="{{ url_for('library_card') }}">Library Card</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% with msgs = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in msgs %}
+    <div class="flash {{ cat }}">{{ msg }}</div>
+  {% endfor %}
+{% endwith %}
+
+<div class="container">
+  <h2>Your Digital Library Card</h2>
+  <div class="card-holder">
+    <div class="library-card">
+      <h3>{{ session.get('username') }}</h3>
+      <div class="line"><strong>Card No:</strong> {{ card['card_number'] }}</div>
+      <div class="line"><strong>Issued:</strong> {{ card['issue_date'] }}</div>
+      <div class="line"><strong>User ID:</strong> {{ session.get('user_id') }}</div>
+      <p class="mt-16 center">Show this card at the desk for services.</p>
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 Library Management System</footer>
+</body>
+</html>

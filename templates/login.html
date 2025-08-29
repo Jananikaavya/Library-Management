@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Library</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">📚 Library Management</div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('books') }}">All Books</a></li>
+        <li><a href="{{ url_for('search') }}">Search</a></li>
+        <li><a class="active" href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% with msgs = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in msgs %}
+    <div class="flash {{ cat }}">{{ msg }}</div>
+  {% endfor %}
+{% endwith %}
+
+<div class="container">
+  <h2>Login</h2>
+  <form method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Login</button>
+      <a class="btn btn-secondary" href="{{ url_for('register') }}">Create Account</a>
+    </div>
+  </form>
+</div>
+
+<footer>© 2025 Library Management System</footer>
+</body>
+</html>
