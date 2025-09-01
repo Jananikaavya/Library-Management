@@ -296,6 +296,8 @@ if __name__ == '__main__':
     if not os.path.exists('library.db'):
         init_db()
     else:
-        # Ensure new tables exist if DB already there
         init_db()
-    app.run(debug=True)
+
+    port = int(os.environ.get("PORT", 5000))  # get Render’s assigned port
+    app.run(host="0.0.0.0", port=port, debug=False)
+
