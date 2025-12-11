@@ -79,20 +79,20 @@ def init_db():
     if c.fetchone()["cnt"] == 0:
         sample_books = [
             ('To Kill a Mockingbird', 'Harper Lee', '9780061120084', 1960, 'Fiction', 'Available', 'A classic novel about racial injustice in the American South.', 'book2.png'),
-            ('1984', 'George Orwell', '9780451524935', 1949, 'Dystopian', 'Available', 'A dystopian social science fiction novel about totalitarian regime.', 'book2.jpg'),
-            ('The Great Gatsby', 'F. Scott Fitzgerald', '9780743273565', 1925, 'Classic', 'Checked Out', 'A story of the fabulously wealthy Jay Gatsby and his love for Daisy Buchanan.', 'book3.jpg'),
-            ('Pride and Prejudice', 'Jane Austen', '9780141439518', 1813, 'Romance', 'Available', 'A romantic novel of manners that depicts the character development of Elizabeth Bennet.', 'book4.jpg'),
-            ('The Hobbit', 'J.R.R. Tolkien', '9780547928227', 1937, 'Fantasy', 'Available', 'A fantasy novel about the adventures of hobbit Bilbo Baggins.', 'book5.jpg'),
-            ('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', '9780747532743', 1997, 'Fantasy', 'Available', 'The first novel in the Harry Potter series.', 'book6.jpg'),
-            ('The Catcher in the Rye', 'J.D. Salinger', '9780316769488', 1951, 'Fiction', 'Available', 'A story about Holden Caulfield\'s experiences in New York City.', 'book1.jpg'),
-            ('The Lord of the Rings', 'J.R.R. Tolkien', '9780544003415', 1954, 'Fantasy', 'Checked Out', 'An epic high-fantasy novel.', 'book2.jpg'),
-            ('Brave New World', 'Aldous Huxley', '9780060850524', 1932, 'Dystopian', 'Available', 'A dystopian social science fiction novel.', 'book3.jpg'),
-            ('The Da Vinci Code', 'Dan Brown', '9780307474278', 2003, 'Mystery', 'Available', 'A mystery thriller novel.', 'book4.jpg'),
-            ('The Alchemist', 'Paulo Coelho', '9780061122415', 1988, 'Fiction', 'Reserved', 'A philosophical novel.', 'book5.jpg'),
-            ('The Hunger Games', 'Suzanne Collins', '9780439023481', 2008, 'Dystopian', 'Available', 'A dystopian novel.', 'book6.jpg'),
-            ('The Girl on the Train', 'Paula Hawkins', '9781594633669', 2015, 'Mystery', 'Available', 'A psychological thriller novel.', 'book1.jpg'),
-            ('Gone Girl', 'Gillian Flynn', '9780307588371', 2012, 'Thriller', 'Checked Out', 'A psychological thriller novel.', 'book2.jpg'),
-            ('Atomic Habits', 'James Clear', '9780735211292', 2018, 'Self-Help', 'Available', 'A guide to building good habits and breaking bad ones.', 'book1.png')
+            ('1984', 'George Orwell', '9780451524935', 1949, 'Dystopian', 'Available', 'A dystopian social science fiction novel about totalitarian regime.', 'book3.png'),
+            ('The Great Gatsby', 'F. Scott Fitzgerald', '9780743273565', 1925, 'Classic', 'Checked Out', 'A story of the fabulously wealthy Jay Gatsby and his love for Daisy Buchanan.', 'book4.png'),
+            ('Pride and Prejudice', 'Jane Austen', '9780141439518', 1813, 'Romance', 'Available', 'A romantic novel of manners that depicts the character development of Elizabeth Bennet.', 'book3.png'),
+            ('The Hobbit', 'J.R.R. Tolkien', '9780547928227', 1937, 'Fantasy', 'Available', 'A fantasy novel about the adventures of hobbit Bilbo Baggins.', 'book5.png'),
+            ('Harry Potter and the Philosopher\'s Stone', 'J.K. Rowling', '9780747532743', 1997, 'Fantasy', 'Available', 'The first novel in the Harry Potter series.', 'book6.png'),
+            ('The Catcher in the Rye', 'J.D. Salinger', '9780316769488', 1951, 'Fiction', 'Available', 'A story about Holden Caulfield\'s experiences in New York City.', 'book7.png'),
+            ('The Lord of the Rings', 'J.R.R. Tolkien', '9780544003415', 1954, 'Fantasy', 'Checked Out', 'An epic high-fantasy novel.', 'book8.png'),
+            ('Brave New World', 'Aldous Huxley', '9780060850524', 1932, 'Dystopian', 'Available', 'A dystopian social science fiction novel.', 'book9.png'),
+            ('The Da Vinci Code', 'Dan Brown', '9780307474278', 2003, 'Mystery', 'Available', 'A mystery thriller novel.', 'book10.png'),
+            ('The Alchemist', 'Paulo Coelho', '9780061122415', 1988, 'Fiction', 'Reserved', 'A philosophical novel.', 'book11.png'),
+            ('The Hunger Games', 'Suzanne Collins', '9780439023481', 2008, 'Dystopian', 'Available', 'A dystopian novel.', 'book12.png'),
+            ('The Girl on the Train', 'Paula Hawkins', '9781594633669', 2015, 'Mystery', 'Available', 'A psychological thriller novel.', 'book13.png'),
+            ('Gone Girl', 'Gillian Flynn', '9780307588371', 2012, 'Thriller', 'Checked Out', 'A psychological thriller novel.', 'book14.png'),
+            ('Atomic Habits', 'James Clear', '9780735211292', 2018, 'Self-Help', 'Available', 'A guide to building good habits and breaking bad ones.', 'book15.png')
         ]
         c.executemany('''INSERT INTO books (title, author, isbn, published_year, genre, status, description, cover)
                          VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', sample_books)
